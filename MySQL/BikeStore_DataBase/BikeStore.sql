@@ -93,7 +93,7 @@ FROM
     order_items AS it ON it.product_id = pd.product_id
         INNER JOIN
     orders AS od ON od.order_id = it.order_id
-ORDER BY od.order_date DESC
+ORDER BY od.order_date 
 LIMIT 1;
 
 				##9- What’s the full name of a customer with ID 259?
@@ -169,7 +169,7 @@ FROM
         INNER JOIN
     order_items o ON p.product_id = o.product_id
 GROUP BY c.category_name
-ORDER BY more_sales DESC
+ORDER BY more_sales
 LIMIT 1;
 
 			##15- Which store still have more products of the most liked brand?
@@ -268,16 +268,7 @@ select distinct ct.category_name,  od.order_date, sum(it.quantity) as total_bike
 from categories as ct inner join products as pd on ct.category_id = pd.category_id
 inner join order_items as it on pd.product_id = it.product_id 
 inner join orders as od on od.order_id = it.order_id
-where ct.category_name  like "children%"
-group by ct.category_name, od.order_date 
-ORDER BY od.order_date DESC
-limit 59;
-
-select distinct ct.category_name,  od.order_date, sum(it.quantity) as total_bike_sold
-from categories as ct inner join products as pd on ct.category_id = pd.category_id
-inner join order_items as it on pd.product_id = it.product_id 
-inner join orders as od on od.order_id = it.order_id
-where ct.category_name  like "children%" and order_date <= "2018-11-18" and order_date >= "2018-03-01"
+where ct.category_name  like "children%" and order_date between '2018-05-01' and '2018-12-30' 
 group by ct.category_name, od.order_date ;
 
 			##22- What’s the shipped date for the order from customer 523?
